@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SignIn & SignUp</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
+
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap");
+    * { font-family: "Poppins", sans-serif; }
+
+    /* Background circle */
+    .container::before {
+      content: "";
+      position: absolute;
+      height: 2000px;
+      width: 2000px;
+      top: -10%;
+      right: 48%;
+      transform: translateY(-50%);
+      background-image: linear-gradient(-45deg, #4481eb 0%, #04befe 100%);
+      transition: 1.8s ease-in-out;
+      border-radius: 50%;
+      z-index: 6;
+    }
+    .container.sign-up-mode::before {
+      transform: translate(100%, -50%);
+      right: 52%;
+    }
+
+    /* Forms container positioning */
+    .signin-signup {
+      position: absolute;
+      top: 50%;
+      left: 75%;
+      transform: translate(-50%, -50%);
+      width: 50%;
+      transition: 1s 0.7s ease-in-out;
+      display: grid;
+      grid-template-columns: 1fr;
+      z-index: 5;
+    }
+    form {
+      grid-column: 1 / 2;
+      grid-row: 1 / 2;
+      transition: all 0.2s 0.7s;
+    }
+    form.sign-up-form { opacity: 0; z-index: 1; }
+    form.sign-in-form { z-index: 2; }
+
+    /* Panel animations */
+    .right-panel .image, .right-panel .content {
+      transform: translateX(800px);
+      transition: transform 1.1s ease-in-out;
+      transition-delay: 0.4s;
+    }
+    .container.sign-up-mode .left-panel .image,
+    .container.sign-up-mode .left-panel .content {
+      transform: translateX(-800px);
+    }
+    .container.sign-up-mode .signin-signup { left: 25%; }
+    .container.sign-up-mode form.sign-up-form {
+      opacity: 1;
+      z-index: 2;
+    }
+    .container.sign-up-mode form.sign-in-form {
+      opacity: 0;
+      z-index: 1;
+    }
+    .container.sign-up-mode .right-panel .image,
+    .container.sign-up-mode .right-panel .content {
+      transform: translateX(0%);
+    }
+    .container.sign-up-mode .left-panel { pointer-events: none; }
+    .container.sign-up-mode .right-panel { pointer-events: all; }
+  </style>
+</head>
+<body class="bg-white min-h-screen flex items-center justify-center">
+
+<div class="container relative w-full min-h-screen overflow-hidden">
+
+  <!-- Forms -->
+  <div class="forms-container absolute w-full h-full top-0 left-0">
+    <div class="signin-signup">
+
+      <!-- Sign In -->
+      <form class="sign-in-form flex flex-col items-center justify-center px-20">
+        <h2 class="text-3xl text-gray-700 mb-3 font-semibold">Sign In</h2>
+        <div class="grid grid-cols-[15%,85%] bg-gray-100 rounded-full h-14 w-full max-w-md px-2 my-2">
+          <i class="fas fa-user flex items-center justify-center text-gray-400"></i>
+          <input type="text" placeholder="Username" class="bg-transparent outline-none border-none font-semibold text-gray-800"/>
+        </div>
+        <div class="grid grid-cols-[15%,85%] bg-gray-100 rounded-full h-14 w-full max-w-md px-2 my-2">
+          <i class="fas fa-lock flex items-center justify-center text-gray-400"></i>
+          <input type="password" placeholder="Password" class="bg-transparent outline-none border-none font-semibold text-gray-800"/>
+        </div>
+        <input type="submit" value="Login" class="bg-blue-500 text-white rounded-full w-36 h-12 uppercase font-semibold cursor-pointer hover:bg-blue-600 transition my-2"/>
+        <p class="py-3 text-base">Or Sign in with social platforms</p>
+        <div class="flex justify-center">
+          <a href="#" class="h-12 w-12 flex items-center justify-center mx-2 rounded-full border border-gray-800 text-gray-800 hover:text-blue-500 hover:border-blue-500 transition"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="h-12 w-12 flex items-center justify-center mx-2 rounded-full border border-gray-800 text-gray-800 hover:text-blue-500 hover:border-blue-500 transition"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="h-12 w-12 flex items-center justify-center mx-2 rounded-full border border-gray-800 text-gray-800 hover:text-blue-500 hover:border-blue-500 transition"><i class="fab fa-google"></i></a>
+          <a href="#" class="h-12 w-12 flex items-center justify-center mx-2 rounded-full border border-gray-800 text-gray-800 hover:text-blue-500 hover:border-blue-500 transition"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </form>
+
+      <!-- Sign Up -->
+      <form class="sign-up-form flex flex-col items-center justify-center px-20">
+        <h2 class="text-3xl text-gray-700 mb-3 font-semibold">Sign Up</h2>
+        <div class="grid grid-cols-[15%,85%] bg-gray-100 rounded-full h-14 w-full max-w-md px-2 my-2">
+          <i class="fas fa-user flex items-center justify-center text-gray-400"></i>
+          <input type="text" placeholder="Username" class="bg-transparent outline-none border-none font-semibold text-gray-800"/>
+        </div>
+        <div class="grid grid-cols-[15%,85%] bg-gray-100 rounded-full h-14 w-full max-w-md px-2 my-2">
+          <i class="fas fa-envelope flex items-center justify-center text-gray-400"></i>
+          <input type="email" placeholder="Email" class="bg-transparent outline-none border-none font-semibold text-gray-800"/>
+        </div>
+        <div class="grid grid-cols-[15%,85%] bg-gray-100 rounded-full h-14 w-full max-w-md px-2 my-2">
+          <i class="fas fa-lock flex items-center justify-center text-gray-400"></i>
+          <input type="password" placeholder="Password" class="bg-transparent outline-none border-none font-semibold text-gray-800"/>
+        </div>
+        <input type="submit" value="Sign Up" class="bg-blue-500 text-white rounded-full w-36 h-12 uppercase font-semibold cursor-pointer hover:bg-blue-600 transition my-2"/>
+        <p class="py-3 text-base">Or Sign up with social platforms</p>
+        <div class="flex justify-center">
+          <a href="#" class="h-12 w-12 flex items-center justify-center mx-2 rounded-full border border-gray-800 text-gray-800 hover:text-blue-500 hover:border-blue-500 transition"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="h-12 w-12 flex items-center justify-center mx-2 rounded-full border border-gray-800 text-gray-800 hover:text-blue-500 hover:border-blue-500 transition"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="h-12 w-12 flex items-center justify-center mx-2 rounded-full border border-gray-800 text-gray-800 hover:text-blue-500 hover:border-blue-500 transition"><i class="fab fa-google"></i></a>
+          <a href="#" class="h-12 w-12 flex items-center justify-center mx-2 rounded-full border border-gray-800 text-gray-800 hover:text-blue-500 hover:border-blue-500 transition"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+  <!-- Panels -->
+  <div class="panels-container absolute h-full w-full top-0 left-0 grid grid-cols-2">
+    <!-- Left Panel -->
+    <div class="panel left-panel flex flex-col items-end justify-around text-center p-12 z-10 pointer-events-auto">
+      <div class="content text-white transition-transform duration-1000 delay-500">
+        <h3 class="font-semibold text-xl">New here?</h3>
+        <p class="text-sm py-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio minus natus est.</p>
+        <button class="border-2 border-white w-32 h-10 text-white font-semibold text-xs" id="sign-up-btn">Sign Up</button>
+      </div>
+      <img src="./img/log.svg" class="image w-full transition-transform duration-1000 delay-500" alt="">
+    </div>
+    <!-- Right Panel -->
+    <div class="panel right-panel flex flex-col items-start justify-around text-center p-12 z-10 pointer-events-none">
+      <div class="content text-white transition-transform duration-1000 delay-500">
+        <h3 class="font-semibold text-xl">One of us?</h3>
+        <p class="text-sm py-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio minus natus est.</p>
+        <button class="border-2 border-white w-32 h-10 text-white font-semibold text-xs" id="sign-in-btn">Sign In</button>
+      </div>
+      <img src="./img/register.svg" class="image w-full transition-transform duration-1000 delay-500" alt="">
+    </div>
+  </div>
+</div>
+
+<script src="./app.js"></script>
+</body>
+</html>
